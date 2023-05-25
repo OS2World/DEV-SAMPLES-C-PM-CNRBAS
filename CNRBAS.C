@@ -20,7 +20,6 @@
 /*    - inserting records                                             */
 /*    - freeing resources when the application is closed              */
 /*                                                                    */
-/*  Compiled using: IBM C Set/2 1.0                                   */
 /* ===================================================================*/
 #define INCL_WINWINDOWMGR
 #define INCL_WINSYS
@@ -28,9 +27,10 @@
 #define INCL_WINSTDCNR
 #include <os2.h>
 #include <stdlib.h>
-#include <cnrbas.h>
+#include <string.h>
+#include "cnrbas.h"
 
-void main(void)
+int main(void)
 {
   HAB   hab;
   HMQ   hmq;
@@ -46,15 +46,15 @@ void main(void)
   /* Register the Container sample window class.  Also reserve 4 bytes
    * of memory to store a pointer to our control block.
    */
-  WinRegisterClass (hab, "Container Sample",
+  WinRegisterClass (hab, (PCSZ) "Container Sample",
                     CnrSampleWndProc, 0, 4);
 
   /* Create a standard frame window. */
   hwndFrame = WinCreateStdWindow (HWND_DESKTOP, /* Handle of desktop  */
                            WS_VISIBLE,          /* Window style       */
                            &fcf,                /* Creation flags     */
-                           "Container Sample",  /* Client Class name  */
-                           "Container Sample",  /* Title Bar text     */
+                           (PCSZ) "Container Sample",  /* Client Class name  */
+                           (PCSZ) "Container Sample",  /* Title Bar text     */
                            0,                   /* client wnd style   */
                            NULLHANDLE,          /* hwnd of resources  */
                            SAMPLE_MENU_ID,      /* ID of Resources    */
@@ -316,7 +316,7 @@ BOOL CreateCnr (HWND hwnd)
       pSampleInfo->pszCnrTitle = malloc(TEXT_SIZE);
       if (pSampleInfo->pszCnrTitle)
       {
-        strcpy (pSampleInfo->pszCnrTitle,
+        strcpy ((char *) pSampleInfo->pszCnrTitle,
                 "Basic Container\r\nSample Program");
         CnrInfo.pszCnrTitle = pSampleInfo->pszCnrTitle;
         CnrInfo.flWindowAttr = CV_ICON | CA_CONTAINERTITLE |
@@ -462,9 +462,9 @@ BOOL PopulateCnr (HWND hwnd)
       switch (i)
       {
         case 1:
-          strcpy (pPersonRec->MiniRec.pszIcon, "Peter Haggar");
+          strcpy ((char *) pPersonRec->MiniRec.pszIcon, "Peter Haggar");
           strcpy (pPersonRec->szMiddleInit, "F");
-          pPersonRec->pszMiddleInit = pPersonRec->szMiddleInit;
+          pPersonRec->pszMiddleInit = (PSZ) pPersonRec->szMiddleInit;
           pPersonRec->DateOfBirth.month = 2;
           pPersonRec->DateOfBirth.day   = 3;
           pPersonRec->DateOfBirth.year  = 65;
@@ -476,9 +476,9 @@ BOOL PopulateCnr (HWND hwnd)
         break;
 
         case 2:
-          strcpy (pPersonRec->MiniRec.pszIcon, "Peter Brightbill");
+          strcpy ((char *)pPersonRec->MiniRec.pszIcon, "Peter Brightbill");
           strcpy (pPersonRec->szMiddleInit, "P");
-          pPersonRec->pszMiddleInit = pPersonRec->szMiddleInit;
+          pPersonRec->pszMiddleInit = (PSZ) pPersonRec->szMiddleInit;
           pPersonRec->DateOfBirth.month = 1;
           pPersonRec->DateOfBirth.day   = 23;
           pPersonRec->DateOfBirth.year  = 65;
@@ -490,9 +490,9 @@ BOOL PopulateCnr (HWND hwnd)
         break;
 
         case 3:
-          strcpy (pPersonRec->MiniRec.pszIcon, "Bob Jones");
+          strcpy ( (char *) pPersonRec->MiniRec.pszIcon, "Bob Jones");
           strcpy (pPersonRec->szMiddleInit, "T");
-          pPersonRec->pszMiddleInit = pPersonRec->szMiddleInit;
+          pPersonRec->pszMiddleInit = (PSZ) pPersonRec->szMiddleInit;
           pPersonRec->DateOfBirth.month = 7;
           pPersonRec->DateOfBirth.day   = 11;
           pPersonRec->DateOfBirth.year  = 54;
@@ -504,9 +504,9 @@ BOOL PopulateCnr (HWND hwnd)
         break;
 
         case 4:
-          strcpy (pPersonRec->MiniRec.pszIcon, "Joe Shmo");
+          strcpy ( (char *) pPersonRec->MiniRec.pszIcon, "Joe Shmo");
           strcpy (pPersonRec->szMiddleInit, "D");
-          pPersonRec->pszMiddleInit = pPersonRec->szMiddleInit;
+          pPersonRec->pszMiddleInit = (PSZ) pPersonRec->szMiddleInit;
           pPersonRec->DateOfBirth.month = 10;
           pPersonRec->DateOfBirth.day   = 29;
           pPersonRec->DateOfBirth.year  = 70;
@@ -518,9 +518,9 @@ BOOL PopulateCnr (HWND hwnd)
         break;
 
         case 5:
-          strcpy (pPersonRec->MiniRec.pszIcon, "John Public");
+          strcpy ( (char *) pPersonRec->MiniRec.pszIcon, "John Public");
           strcpy (pPersonRec->szMiddleInit, "Q");
-          pPersonRec->pszMiddleInit = pPersonRec->szMiddleInit;
+          pPersonRec->pszMiddleInit = (PSZ) pPersonRec->szMiddleInit;
           pPersonRec->DateOfBirth.month = 5;
           pPersonRec->DateOfBirth.day   = 17;
           pPersonRec->DateOfBirth.year  = 61;
@@ -821,11 +821,11 @@ BOOL AddChildren (HWND hwnd, PPERSONRECORD pParentRec)
   {
     if (pParentRec->usJob == JR_DEVELOPMENT)
     {
-      strcpy (pChildRec->MiniRec.pszIcon, "Design");
+      strcpy ( (char *) pChildRec->MiniRec.pszIcon, "Design");
     }
     else
     {
-      strcpy (pChildRec->MiniRec.pszIcon, "Planning");
+      strcpy ( (char *) pChildRec->MiniRec.pszIcon, "Planning");
     }
   }
   else
@@ -842,11 +842,11 @@ BOOL AddChildren (HWND hwnd, PPERSONRECORD pParentRec)
     {
       if (pParentRec->usJob == JR_DEVELOPMENT)
       {
-        strcpy (pChildRec->MiniRec.pszIcon, "Coding");
+        strcpy ( (char *) pChildRec->MiniRec.pszIcon, "Coding");
       }
       else
       {
-        strcpy (pChildRec->MiniRec.pszIcon, "Function\r\nTest");
+        strcpy ( (char *) pChildRec->MiniRec.pszIcon, "Function\r\nTest");
       }
     }
     else
@@ -865,11 +865,11 @@ BOOL AddChildren (HWND hwnd, PPERSONRECORD pParentRec)
       /* \r\n or \n will work to create a multi line entry. */
       if (pParentRec->usJob == JR_DEVELOPMENT)
       {
-        strcpy (pChildRec->MiniRec.pszIcon, "Unit\nTest");
+        strcpy ( (char *) pChildRec->MiniRec.pszIcon, "Unit\nTest");
       }
       else
       {
-        strcpy (pChildRec->MiniRec.pszIcon, "Documentation");
+        strcpy ( (char *) pChildRec->MiniRec.pszIcon, "Documentation");
       }
     }
     else
@@ -1046,4 +1046,3 @@ VOID CleanupChildren (HWND hwnd, PPERSONRECORD pParentRec)
   }
   return;
 }
-

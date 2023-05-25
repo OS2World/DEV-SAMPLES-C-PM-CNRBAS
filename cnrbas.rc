@@ -1,5 +1,8 @@
+/*----------------------------------
+   CNRBAS.RC resource script file
+  ----------------------------------*/
 #include <os2.h>
-#include <cnrbas.h>
+#include "cnrbas.h"
 
 MENU SAMPLE_MENU_ID  LOADONCALL MOVEABLE DISCARDABLE
 BEGIN
@@ -22,4 +25,3 @@ END
 ICON SAMPLE_MENU_ID LOADONCALL MOVEABLE DISCARDABLE person.ico
 ICON ID_PERSON_ICON LOADONCALL MOVEABLE DISCARDABLE person.ico
 ICON ID_JOB_ICON LOADONCALL MOVEABLE DISCARDABLE job.ico
-

@@ -1,4 +1,6 @@
-/* Defines for sample program */
+/*------------------------
+   CNRBAS.H header file
+  ------------------------*/
 #define CNR_SAMPLE_ID   100
 
 #define SAMPLE_MENU_ID        201
@@ -54,4 +56,3 @@ BOOL PopulateTree (HWND hwnd);
 BOOL AddChildren (HWND hwnd, PPERSONRECORD pParentRec);
 VOID CleanupCnr (HWND hwnd);
 VOID CleanupChildren (HWND hwnd, PPERSONRECORD pParentRec);
-
