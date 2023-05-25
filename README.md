@@ -5,15 +5,16 @@ This sample shows how to program a basic container application.  It shows how to
 
 LICENSE
 ===============
-* Not Specified
+* BSD 3-Clause License
 
 COMPILE TOOLS
 ===============
-* 
+* yum install git gcc make libc-devel binutils watcom-wrc watcom-wlink-hll
  
 AUTHORS
 ===============
-* 
+* Martin Iturbide
+* Rick Fishman
 
 LINKS
 ===============
