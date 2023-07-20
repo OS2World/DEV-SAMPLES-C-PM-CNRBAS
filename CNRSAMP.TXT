@@ -1,7 +1,7 @@
 Name: 		CNRBAS
 Descripcion: 	Basic Container Sample program 
 Date: 		2023-07-20
-Version:	1.01
+Version:	1.02
 ----------------------------   
 
 
@@ -47,7 +47,7 @@ The compile produce will run by just executing make on the directory, but a comp
 
 HISTORY
 ---------- 
-- 1.01 - 2023-07-20
+- 1.02 - 2023-07-20
 Changed version to compile on gcc and to run on ArcaOS 5.0.7.
 
 - 1.0
