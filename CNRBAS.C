@@ -90,7 +90,7 @@ MRESULT EXPENTRY CnrSampleWndProc (HWND hwnd, ULONG msg,
   HPS          hps;
   RECTL        rect;
   CNRINFO      CnrInfo;
-  PSAMPLEINFO  pSampleInfo;
+  PSAMPLEINFO  pSampleInfo ;
 
   switch (msg)
   {
@@ -275,7 +275,7 @@ MRESULT EXPENTRY CnrSampleWndProc (HWND hwnd, ULONG msg,
 BOOL CreateCnr (HWND hwnd)
 {
   HWND         hwndCnr;
-  PSAMPLEINFO  pSampleInfo;
+  PSAMPLEINFO  pSampleInfo =0;
   CNRINFO      CnrInfo;
   BOOL         rc = TRUE;
 
@@ -355,7 +355,7 @@ BOOL CreateCnr (HWND hwnd)
     {
       WinDestroyWindow (hwndCnr);
     }
-    if (pSampleInfo)
+    if (pSampleInfo )
     {
       if (pSampleInfo->pszCnrTitle)
       {
@@ -392,7 +392,7 @@ BOOL PopulateCnr (HWND hwnd)
   PSAMPLEINFO    pSampleInfo;
   PPERSONRECORD  pPersonRec;
   PPERSONRECORD  pPersonRecFirst;
-  HPOINTER       hptrPersonIcon;
+  // HPOINTER       hptrPersonIcon;
   USHORT         i;
   RECORDINSERT   RecordInsert;
   BOOL           rc = TRUE;

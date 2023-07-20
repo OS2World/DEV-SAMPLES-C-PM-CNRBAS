@@ -1,20 +1,22 @@
-# make makefile
-#
+# nmake makefile
+# 
 # Tools used:
 #  Compile::Resource Compiler
 #  Compile::GNU C
-#  Make: make
+#  Make: nmake
+
 all : cnrbas.exe
 
 cnrbas.exe : cnrbas.obj cnrbas.res cnrbas.def
-	gcc -Zomf cnrbas.obj cnrbas.def -o cnrbas.exe
+	gcc -Zomf cnrbas.obj cnrbas.res cnrbas.def -o cnrbas.exe
 	wrc cnrbas.res
 
 cnrbas.obj : cnrbas.c cnrbas.h
 	gcc -Wall -Zomf -c -O2 cnrbas.c -o cnrbas.obj
 
-cnrbas.res : cnrbas.rc 
+cnrbas.res : cnrbas.rc
 	wrc -r cnrbas.rc
 
 clean :
-	rm -rf *exe *res *obj *lib *dll *map
+	rm -rf *exe *res *obj *dll *map
+ 

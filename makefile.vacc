@@ -1,0 +1,47 @@
+# IBM Developer's Workframe/2 Make File Creation run at 19:21:38 on 12/08/92
+
+LINKFLAGS = /m /noi /nologo
+DEBUGFLAG=YES
+
+!IF "$(DEBUGFLAG)"=="NO"
+#  debug off, optimization on
+dopts=/O+
+#  no debug options ... production level
+CVFLAG=/EXEPACK /NOI /NOL
+!ELSE
+#  debugging on, optimization off
+dopts=/Ti
+#  debug on   ... test level
+CVFLAG=/CODEVIEW /NOI /NOL
+!ENDIF
+
+.SUFFIXES:
+
+.SUFFIXES: .c .rc
+
+ALL: CNRBAS.EXE \
+     CNRBAS.RES
+
+cnrbas.exe:  \
+  CNRBAS.OBJ \
+  CNRBAS.RES \
+  cnrbas.def \
+  MAKEFILE
+   @REM @<<CNRBAS.@0
+     /CO /M /PM:PM +
+     CNRBAS.OBJ
+     cnrbas.exe
+     cnrbas.map
+     os2386
+     cnrbas.def;
+<<
+   link386.exe @CNRBAS.@0 /NOD $(LINKFLAGS) $(CVFLAG)
+   RC CNRBAS.RES cnrbas.exe
+
+{.}.rc.res:
+   RC -r .\$*.RC
+
+{.}.c.obj:
+   icc.exe $(dopts) .\$*.c
+
+!include MAKEFILE.DEP
